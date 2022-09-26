@@ -35,7 +35,7 @@ class ColorsList extends GetView<TabItemController> {
     50
   ];
 
-  Widget _buildList(MaterialColor color) {
+  Widget _buildList(MaterialColor color) { //
     return ListView.builder(
         itemCount: materialIndices.length, // 아이템 전체 갯수를 기준으로
         itemBuilder: (BuildContext content, int index) { // 리스트의 아이템을 만드는데 각 인덱스에 따라서

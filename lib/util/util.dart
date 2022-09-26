@@ -7,7 +7,7 @@ enum TabItem { red, blue, green } // 컬러 팔레트를 위한 색상 선택 en
 2. 만약 지금처럼 클래스로 만들어서 static 으로 간다면 이 값들을 모두에세서 공유하는게 되잖아..
 3. 근데 다시 이렇게 값들을 일반 클래스로 만들면 이 값들을 계속 고유한 곳에 보관할게 할 수 있다.
  */
-const Map<TabItem, String> tabName = {
+const Map<TabItem, String> tabName = { //
   TabItem.red : 'RED',
   TabItem.blue : 'BLUE',
   TabItem.green : 'GREEN'

@@ -8,7 +8,7 @@ class ColorDetail extends StatelessWidget {
   final int materialIndex;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) {  //
     return Scaffold(
       appBar: AppBar(
         backgroundColor: color,

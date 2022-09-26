@@ -10,7 +10,7 @@ class MyBody extends GetView<TabItemController> {
 
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) { //
     //print('테이터의 값은 ${controller.currentTab.value.index} 입니다.');
     return Obx(() =>
       WillPopScope(

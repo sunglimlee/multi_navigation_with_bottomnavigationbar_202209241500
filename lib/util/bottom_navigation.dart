@@ -8,9 +8,9 @@ class BottomNavigation extends GetView<TabItemController> {
   // 여기가 아규먼트이고
   const BottomNavigation(this.onSelectTab, {this.key}) : super(key: key); // 현재 설정값 vs 선택한 값
   @override
-  final Key? key; // TODO
+  final Key? key;   // TODO
   // 그래서 그 값들을 각각 받고
-  final void Function(TabItem tabitem) onSelectTab; // 콜백함수
+  final void Function(TabItem tabitem) onSelectTab;   // 콜백함수
 
   @override
   Widget build(BuildContext context) {
