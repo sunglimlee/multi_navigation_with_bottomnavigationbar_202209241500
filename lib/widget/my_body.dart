@@ -15,11 +15,15 @@ class MyBody extends GetView<TabItemController> {
     return Obx(() =>
         WillPopScope(
           onWillPop: () async { // pop 할때 일단
+            // https://stackoverflow.com/questions/67134255/how-to-use-inner-navigation-if-we-using-bottomnavigationbar-on-getx
+            // https://github.com/jonataslaw/getx/issues/496
+            //
             final isFirstRouteInCurrentTab =
             // 현재 GlobalKey 를 가진 Navigator 의 NavigateState 가 pop 이가능하나? (maybePop)
             // true 를 리턴하면 첫번째 페이지가 아니라는 거지.. 그래서 ! 느낌표를 넣은거고
             // 여기서부터 다시하자. GlobalKey 를 어떻게 설정하는지 알아야 한다.
-            !await Get.keys[controller.currentTab.value.index]!.currentState!.maybePop();
+            // 했다. 해냈어 드디어... !!!!! 결국 그냥 nestedKey 를 설정한게 그게 그냥 Global 키였네.. 그 Global Key 를 그냥 Get.keys 로 찾을 수 있는거네.. 내용만 똑같으면
+            !await Get.keys[TabItem.values[controller.currentTab.value.index].index]!.currentState!.maybePop();
             // pop 이 가능하지 않아서 즉 첫번째 페이지라서 ifFirstRouteInCurrentTab 이 true 라면
             if (isFirstRouteInCurrentTab) {
               // if not on the 'main' tab
@@ -35,6 +39,7 @@ class MyBody extends GetView<TabItemController> {
             //
             // let system handle back button if we're on the first route
             // 만약에 true 라면 이제는 시스템에 제어권을 넘겨서 ModalRoute 를 종료하겠다는 거지.
+            // 빠져 나갈까요? 물어보는 기능 넣고 TODO
             return isFirstRouteInCurrentTab;
           },
           child: IndexedStack(
@@ -74,6 +79,7 @@ class IndexedStackNavigator extends GetView<TabItemController> {
     //var t = tabName[tabItem];
     // 맨첫페이지가 만들어지는거니깐.
     return Navigator(
+      // 이 자체가 GlobalKey<NavigatorState> 였어!!...
       key: Get.nestedKey(TabItem.values[tabItem.index].index),
       //key:_navigatorKeys[controller.currentTab],
       initialRoute: IndexedStackNavigatorRoutes.root,
