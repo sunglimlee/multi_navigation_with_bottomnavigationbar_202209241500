@@ -16,7 +16,7 @@ class BottomNavigation extends GetView<TabItemController> {
   Widget build(BuildContext context) {
     return Obx (() =>
     BottomNavigationBar( // 이제 BottomNavigation 을 만든다.
-      key: key, // 키가 필요했었나?
+      key: const ValueKey(1), // 키가 필요했었나? TODO 이런게 있네..?????
       type: BottomNavigationBarType.fixed, // width 즉 가로가 정해져 있다는 뜻
       items: [ // BottomNavigationBarItem 을 넣기 위한 부분
         _buildItem(TabItem.red), // 아이템을 세가지로 만든이유는 동시에 존재해야 하기때문에
