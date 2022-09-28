@@ -1,6 +1,9 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:multi_navigation_with_bottomnavigationbar_202209241500/controller/tabitem_controller.dart';
+import 'package:multi_navigation_with_bottomnavigationbar_202209241500/util/message_popup.dart';
 import 'package:multi_navigation_with_bottomnavigationbar_202209241500/util/util.dart';
 import 'package:multi_navigation_with_bottomnavigationbar_202209241500/widget/color_detail.dart';
 import 'package:multi_navigation_with_bottomnavigationbar_202209241500/widget/color_list.dart';
@@ -39,7 +42,21 @@ class MyBody extends GetView<TabItemController> {
             //
             // let system handle back button if we're on the first route
             // 만약에 true 라면 이제는 시스템에 제어권을 넘겨서 ModalRoute 를 종료하겠다는 거지.
-            // 빠져 나갈까요? 물어보는 기능 넣고 TODO
+            // 여기서 빨강색 탭인지 그리고 현재 맨첫번째 탭인지 확인하고 나서 다이얼로그를 띄어주도록 하자.
+            if (controller.currentTab == TabItem.red && isFirstRouteInCurrentTab) {
+              showDialog(
+                context: Get.context!,
+                builder: (context) {
+                  return MessagePopup(
+                    // 여기 잘보자. cancel Callback : Get.back 만 했다. 왜냐하면 함수가 넘어가야 하니깐.
+                    okCallback: () => exit(0),
+                    title: '시스템',
+                    message: '종료하시겠습니까?',
+                    cancelCallback: Get.back,
+                  );
+                });
+            }
+            //(yesNo == true && (Platform.isAndroid || Platform.isIOS)) ? yesNo : false;
             return isFirstRouteInCurrentTab;
           },
           child: IndexedStack(
